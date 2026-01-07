@@ -1,26 +1,41 @@
 @import "tailwindcss";
 
+@theme {
+  /* Cores da CGS Corretora */
+  --color-cgs-blue: #1c3a4b;
+  --color-cgs-sand: #e6dcd0;
+  --color-cgs-gold: #c1a46d;
+  
+  /* Mantendo as variáveis padrão para o sistema */
+  --color-background: white;
+  --color-foreground: #1c3a4b;
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground: #1c3a4b;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Remove o modo escuro automático para não bagunçar as cores da marca */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #1c3a4b;
+  }
+}
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  display: flex;
+  width: max-content;
+  animation: scroll 30s linear infinite;
 }
