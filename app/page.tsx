@@ -203,21 +203,23 @@ export default function Home() {
         </div>
       </div>
 
-      {/* --- BANNER SECTION --- */}
+      {/* --- BANNER SECTION CORRIGIDA PARA MOBILE --- */}
       <section className="relative w-full bg-[#f2efe9]">
         <div className="relative w-full">
           <Image src="/banner-protecao.png" alt="Fundo Proteção CGS" width={1920} height={1080} className="w-full h-auto block" priority />
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-end px-4 text-center pb-12 md:pb-40 overflow-hidden">
+          {/* AQUI FOI O PULO DO GATO: pb-36 no mobile dá espaço pros elementos */}
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-end px-4 text-center pb-36 md:pb-40 overflow-hidden">
             
-            {/* CGS Background Text (AJUSTADO: subiu + 3mm no total) */}
-            <h1 className={`${tanPearlFont.className} text-[5rem] md:text-[10rem] leading-none text-[#1c3a4b] tracking-tighter select-none mb-[-1rem] md:mb-[-2rem] relative -top-8 md:-top-16 opacity-90`}>
+            {/* CGS Background Text (Ajustado posicionamento e margem no mobile) */}
+            <h1 className={`${tanPearlFont.className} text-[5rem] md:text-[10rem] leading-none text-[#1c3a4b] tracking-tighter select-none mb-2 md:mb-[-2rem] relative -top-10 md:-top-16 opacity-90`}>
               CGS
             </h1>
 
             <h2 className="font-serif text-xl md:text-5xl font-bold text-[#1c3a4b] leading-tight mb-3 md:mb-4 drop-shadow-sm relative z-20">
               Há 15 anos cuidando <br /> do seu patrimônio
             </h2>
-            <p className="font-serif text-xs md:text-xl text-[#1c3a4b] mb-8 md:mb-12 font-medium max-w-lg relative z-20">
+            {/* Mais margem abaixo da frase no mobile */}
+            <p className="font-serif text-xs md:text-xl text-[#1c3a4b] mb-10 md:mb-12 font-medium max-w-lg relative z-20">
               3x Indicada à melhor do Brasil pela <span className="italic">Bradesco Seguros</span>
             </p>
             <a href="#seguros" className="border-2 border-[#1c3a4b] bg-transparent text-[#1c3a4b] font-bold px-6 py-2 md:px-8 md:py-3 rounded-full text-[10px] md:text-xs hover:bg-[#1c3a4b] hover:text-[#f2efe9] transition-all uppercase tracking-[0.2em] active:scale-95 shadow-lg relative z-20">
