@@ -34,7 +34,7 @@ const ICONS = {
   ),
   rural: (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1c3a4b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
-      <path d="M12 3v18M12 5l-2 2m2 0l-2 2m2 0l-2 2M12 5l2 2m-2 0l2 2m-2 0l2 2m-2 0l2 2m-2 0l2 2" />
+      <path d="M12 3v18M12 5l-2 2m2 0l-2 2m2 0l-2 2M12 5l2 2m-2 0l2 2m-2 0l2 2m-2 0l2 2m-2 0l2 2m-2 0l2 2" />
     </svg>
   ),
   pet: (
@@ -195,7 +195,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* --- BANNER SECTION (MOBILE COM GUARDA-CHUVA MAIOR E MAIS ALTO) --- */}
+      {/* --- BANNER SECTION (MOBILE COM GUARDA-CHUVA GIGANTE) --- */}
       <section className="relative w-full bg-[#f2efe9]">
         <div className="relative w-full">
           <Image 
@@ -209,14 +209,14 @@ export default function Home() {
           
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-end px-4 text-center pb-20 md:pb-40 overflow-hidden">
             
-            {/* --- NOVO: ÍCONE GUARDA-CHUVA (APENAS MOBILE) --- */}
-            {/* AUMENTADO para w-32 h-32. PUXADO PARA CIMA com -mt-10 */}
-            <div className="relative w-32 h-32 md:hidden mb-4 -mt-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            {/* --- NOVO: ÍCONE GUARDA-CHUVA GIGANTE (APENAS MOBILE) --- */}
+            {/* GIGANTE: w-72 h-72. PUXADO PARA CIMA: -mt-32 */}
+            <div className="relative w-72 h-72 md:hidden mb-0 -mt-32 animate-in fade-in slide-in-from-bottom-4 duration-700 pointer-events-none">
                 <Image
                     src="/guarda-chuva.png"
                     alt="Proteção CGS"
                     fill
-                    className="object-contain drop-shadow-sm"
+                    className="object-contain drop-shadow-lg"
                 />
             </div>
 
