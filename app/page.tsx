@@ -195,28 +195,38 @@ export default function Home() {
         </div>
       </div>
 
-      {/* --- BANNER SECTION (MOBILE AJUSTADO / DESKTOP ORIGINAL) --- */}
+      {/* --- BANNER SECTION CORRIGIDA PARA MOBILE --- */}
       <section className="relative w-full bg-[#f2efe9]">
         <div className="relative w-full">
-          <Image src="/banner-protecao.png" alt="Fundo Proteção CGS" width={1920} height={1080} className="w-full h-auto block" priority />
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-end px-4 text-center pb-24 md:pb-40 overflow-hidden">
+          {/* CORREÇÃO: 
+             No mobile (padrão) -> h-[85vh] (ocupa 85% da altura da tela, cortando as laterais).
+             No desktop (md) -> h-auto (volta ao normal proporcional).
+          */}
+          <Image 
+            src="/banner-protecao.png" 
+            alt="Fundo Proteção CGS" 
+            width={1920} 
+            height={1080} 
+            className="w-full h-[85vh] md:h-auto object-cover object-center block" 
+            priority 
+          />
+          
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-end px-4 text-center pb-20 md:pb-40 overflow-hidden">
             
-            {/* CGS Text: 
-               - Mobile: text-[5rem], -top-4, mb-0 (Fica menor e bem posicionado)
-               - Desktop: text-[10rem], -top-16, mb-[-2rem] (Fica gigante e impactante) 
-            */}
-            <h1 className={`${tanPearlFont.className} text-[5rem] md:text-[10rem] leading-none text-[#1c3a4b] tracking-tighter select-none mb-0 md:mb-[-2rem] relative -top-4 md:-top-16 opacity-90`}>
+            {/* CGS Text */}
+            <h1 className={`${tanPearlFont.className} text-[5rem] md:text-[10rem] leading-none text-[#1c3a4b] tracking-tighter select-none mb-4 md:mb-[-2rem] relative -top-0 md:-top-16 opacity-90`}>
               CGS
             </h1>
 
-            {/* Textos com tamanho ajustado para mobile (text-2xl) e desktop (text-5xl) */}
-            <h2 className="font-serif text-2xl md:text-5xl font-bold text-[#1c3a4b] leading-tight mb-3 md:mb-4 drop-shadow-sm relative z-20">
+            <h2 className="font-serif text-2xl md:text-5xl font-bold text-[#1c3a4b] leading-tight mb-4 drop-shadow-sm relative z-20">
               Há 15 anos cuidando <br /> do seu patrimônio
             </h2>
-            <p className="font-serif text-sm md:text-xl text-[#1c3a4b] mb-8 md:mb-12 font-medium max-w-lg relative z-20">
+            
+            <p className="font-serif text-sm md:text-xl text-[#1c3a4b] mb-12 font-medium max-w-lg relative z-20">
               3x Indicada à melhor do Brasil pela <span className="italic">Bradesco Seguros</span>
             </p>
-            <a href="#seguros" className="border-2 border-[#1c3a4b] bg-transparent text-[#1c3a4b] font-bold px-6 py-2 md:px-8 md:py-3 rounded-full text-[10px] md:text-xs hover:bg-[#1c3a4b] hover:text-[#f2efe9] transition-all uppercase tracking-[0.2em] active:scale-95 shadow-lg relative z-20">
+            
+            <a href="#seguros" className="border-2 border-[#1c3a4b] bg-transparent text-[#1c3a4b] font-bold px-8 py-3 rounded-full text-xs md:text-xs hover:bg-[#1c3a4b] hover:text-[#f2efe9] transition-all uppercase tracking-[0.2em] active:scale-95 shadow-lg relative z-20">
               SIMULE AGORA
             </a>
           </div>
