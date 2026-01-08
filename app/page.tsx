@@ -91,11 +91,26 @@ const ICONS = {
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [isDesktopMode, setIsDesktopMode] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
+    // Verificar se é mobile na entrada e mostrar popup
+    if (window.innerWidth < 768) {
+      setShowPopup(true);
+    }
   }, []);
+
+  const switchMode = (mode: 'desktop' | 'mobile') => {
+    if (mode === 'desktop') {
+      setIsDesktopMode(true);
+    } else {
+      setIsDesktopMode(false);
+    }
+    setShowPopup(false);
+  };
 
   const scroll = (direction: 'left' | 'right') => {
     if (carouselRef.current) {
@@ -143,18 +158,60 @@ export default function Home() {
   const cardBtnStyle = "w-full block text-center py-3 rounded-lg font-bold text-[10px] tracking-[0.2em] transition-all bg-[#1c3a4b] text-[#e0d5c3] hover:bg-[#c1a46d] hover:text-[#1c3a4b] uppercase";
 
   return (
-    <main className="min-h-screen bg-[#f2efe9] text-[#1c3a4b] font-sans scroll-smooth relative overflow-x-hidden">
+    // Se estiver em modo Desktop, forçamos a largura minima, o que fará o celular dar zoom out ou scroll
+    <main className={`min-h-screen bg-[#f2efe9] text-[#1c3a4b] font-sans scroll-smooth relative overflow-x-hidden ${isDesktopMode ? 'min-w-[1280px]' : ''}`}>
       
+      {/* --- POPUP MOBILE --- */}
+      {showPopup && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-300">
+          <div className="bg-[#f2efe9] w-full max-w-sm rounded-2xl p-6 shadow-2xl border border-[#c1a46d]/30 relative animate-in slide-in-from-bottom-10 duration-500">
+            <button 
+              onClick={() => setShowPopup(false)} 
+              className="absolute top-3 right-3 text-[#1c3a4b]/50 hover:text-[#1c3a4b] p-1"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            
+            <div className="text-center">
+              <h3 className="text-lg font-serif font-bold text-[#1c3a4b] mb-2">Bem-vindo à CGS!</h3>
+              <p className="text-sm text-gray-600 mb-6">Para a melhor experiência visual, recomendamos visualizar nosso site na versão completa.</p>
+              
+              <div className="flex flex-col gap-3">
+                <button 
+                  onClick={() => switchMode('desktop')}
+                  className="w-full bg-[#1c3a4b] text-[#e0d5c3] py-3 rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg hover:bg-[#c1a46d] transition-colors flex items-center justify-center gap-2"
+                >
+                  <span>Versão Desktop</span>
+                  <span className="bg-[#c1a46d] text-[#1c3a4b] text-[9px] px-1.5 py-0.5 rounded font-bold">RECOMENDADO</span>
+                </button>
+                <button 
+                  onClick={() => switchMode('mobile')}
+                  className="w-full bg-transparent border border-[#1c3a4b]/20 text-[#1c3a4b] py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#1c3a4b]/5 transition-colors"
+                >
+                  Continuar no Mobile
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* --- HEADER --- */}
       <header className="absolute top-0 left-0 w-full z-40 px-4 md:px-6 py-6 md:py-8 pointer-events-none">
         <div className="max-w-7xl mx-auto flex flex-row items-center justify-between">
+          
+          {/* Logo (Esquerda) */}
           <div className="relative h-14 w-24 md:h-20 md:w-32">
             <Image src="/logoo.png" fill alt="Logo CGS" className="object-contain" priority sizes="(max-width: 768px) 100vw, 33vw" />
           </div>
+
+          {/* Links (Escondidos no Mobile para limpar o visual) */}
           <div className="hidden md:flex gap-4">
             <a href="#seguros" className={heroBtnStyle}>Produtos</a>
             <a href="#footer" className={heroBtnStyle}>Contato</a>
           </div>
+
+          {/* Botão Simule Agora (Direita) */}
           <div>
             <a href="#seguros" className={heroBtnStyle}>SIMULE AGORA</a>
           </div>
@@ -217,9 +274,9 @@ export default function Home() {
               3x Indicada à melhor do Brasil pela <span className="italic">Bradesco Seguros</span>
             </p>
             
-            {/* Botão sempre visível e com texto diferente pra testar atualização */}
+            {/* Botão sempre visível */}
             <a href="#seguros" className="border-2 border-[#1c3a4b] bg-transparent text-[#1c3a4b] font-bold px-6 py-2 md:px-8 md:py-3 rounded-full text-[10px] md:text-xs hover:bg-[#1c3a4b] hover:text-[#f2efe9] transition-all uppercase tracking-[0.2em] active:scale-95 shadow-lg relative z-20">
-              VERIFICAR AGORA
+              SIMULE AGORA
             </a>
           </div>
         </div>
@@ -270,7 +327,7 @@ export default function Home() {
               <a href="https://wa.me/5511994751153" target="_blank" className="w-8 h-8 rounded-full bg-[#e0d5c3]/10 flex items-center justify-center hover:bg-[#c1a46d] hover:text-[#1c3a4b] transition-colors" aria-label="WhatsApp">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               </a>
-              <a href="mailto:contato@cgscorretora.com.br" className="w-8 h-8 rounded-full bg-[#e0d5c3]/10 flex items-center justify-center hover:bg-[#c1a46d] hover:text-[#1c3a4b] transition-colors" aria-label="Email">
+              <a href="mailto:contato@cgscorretora.com" className="w-8 h-8 rounded-full bg-[#e0d5c3]/10 flex items-center justify-center hover:bg-[#c1a46d] hover:text-[#1c3a4b] transition-colors" aria-label="Email">
                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
               </a>
             </div>
@@ -278,7 +335,7 @@ export default function Home() {
           <div className="flex flex-col space-y-3">
             <h3 className="text-[#c1a46d] font-bold tracking-widest uppercase mb-1 text-xs">Fale Conosco</h3>
             <div className="text-[#e0d5c3]/80 text-sm">
-              <p className="hover:text-[#c1a46d] transition-colors cursor-pointer mb-2">contato@cgscorretora.com.br</p>
+              <p className="hover:text-[#c1a46d] transition-colors cursor-pointer mb-2">contato@cgscorretora.com</p>
               <p className="leading-relaxed">Atendimento Digital <br /> São Paulo, SP</p>
             </div>
             <p className="text-[#c1a46d] font-bold text-base">+55 11 99475-1153</p>
