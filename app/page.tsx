@@ -141,25 +141,29 @@ export default function Home() {
   if (!mounted) return null;
 
   // Common styles
-  const heroBtnStyle = "border border-[#c1a46d]/50 text-[#c1a46d] font-bold px-6 py-2 rounded-full text-[10px] md:text-[11px] hover:bg-[#c1a46d] hover:text-[#1A1612] hover:border-[#c1a46d] transition-all uppercase tracking-[0.25em] active:scale-95 backdrop-blur-sm shadow-sm pointer-events-auto inline-block";
+  const heroBtnStyle = "border border-[#c1a46d]/50 text-[#c1a46d] font-bold px-4 py-2 md:px-6 md:py-2 rounded-full text-[10px] md:text-[11px] hover:bg-[#c1a46d] hover:text-[#1A1612] hover:border-[#c1a46d] transition-all uppercase tracking-[0.25em] active:scale-95 backdrop-blur-sm shadow-sm pointer-events-auto inline-block";
   const cardBtnStyle = "w-full block text-center py-3 rounded-lg font-bold text-[10px] tracking-[0.2em] transition-all bg-[#1c3a4b] text-[#e0d5c3] hover:bg-[#c1a46d] hover:text-[#1c3a4b] uppercase";
 
   return (
-    <main className="min-h-screen bg-[#f2efe9] text-[#1c3a4b] font-sans scroll-smooth relative">
+    <main className="min-h-screen bg-[#f2efe9] text-[#1c3a4b] font-sans scroll-smooth relative overflow-x-hidden">
       
       {/* --- HEADER --- */}
-      <header className="absolute top-0 left-0 w-full z-40 px-6 py-8 pointer-events-none">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex gap-4 order-2 md:order-1">
+      <header className="absolute top-0 left-0 w-full z-40 px-4 md:px-6 py-6 md:py-8 pointer-events-none">
+        <div className="max-w-7xl mx-auto flex flex-row items-center justify-between">
+          
+          {/* Logo (Esquerda) */}
+          <div className="relative h-14 w-24 md:h-20 md:w-32">
+            <Image src="/logoo.png" fill alt="Logo CGS" className="object-contain" priority sizes="(max-width: 768px) 100vw, 33vw" />
+          </div>
+
+          {/* Links (Escondidos no Mobile para limpar o visual) */}
+          <div className="hidden md:flex gap-4">
             <a href="#seguros" className={heroBtnStyle}>Produtos</a>
             <a href="#footer" className={heroBtnStyle}>Contato</a>
           </div>
-          <div className="order-1 md:order-2">
-            <div className="relative h-14 w-24 md:h-20 md:w-32">
-              <Image src="/logoo.png" fill alt="Logo CGS" className="object-contain" priority sizes="(max-width: 768px) 100vw, 33vw" />
-            </div>
-          </div>
-          <div className="order-3">
+
+          {/* Botão Simule Agora (Direita) */}
+          <div>
             <a href="#seguros" className={heroBtnStyle}>SIMULE AGORA</a>
           </div>
         </div>
@@ -171,30 +175,27 @@ export default function Home() {
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
         <div className="absolute z-10 w-full h-full bg-black/65"></div>
-        <div className="relative z-20 text-center px-6 w-full max-w-7xl pt-20">
-          <span className="text-[#c1a46d] tracking-[0.5em] text-[10px] md:text-xs font-bold uppercase mb-8 block">
+        <div className="relative z-20 text-center px-4 w-full max-w-7xl pt-10 md:pt-20">
+          <span className="text-[#c1a46d] tracking-[0.3em] md:tracking-[0.5em] text-[10px] md:text-xs font-bold uppercase mb-6 md:mb-8 block">
             Especialistas em Proteção Patrimonial
           </span>
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif text-[#e0d5c3] mb-4 drop-shadow-2xl whitespace-nowrap">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif text-[#e0d5c3] mb-4 drop-shadow-2xl md:whitespace-nowrap leading-tight">
             O que você quer <span className="italic text-[#c1a46d]">proteger</span> hoje?
           </h1>
         </div>
       </section>
 
-      {/* --- LOGO CAROUSEL (COM EFEITO SEDA/ESPELHO DOURADO) --- */}
+      {/* --- LOGO CAROUSEL --- */}
       <div className="bg-[#c1a46d] h-24 overflow-hidden shadow-2xl relative z-30 flex items-center border-y border-white/20">
-        {/* Camada de Efeito Metálico/Seda */}
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-white/25 via-transparent to-black/10 backdrop-blur-[0.5px] pointer-events-none"></div>
-
-        <div className="animate-scroll flex items-center gap-24 whitespace-nowrap px-10 h-full relative z-10">
-          {/* Duplicating array for infinite scroll effect */}
+        <div className="animate-scroll flex items-center gap-12 md:gap-24 whitespace-nowrap px-6 md:px-10 h-full relative z-10">
           {[...logosSeguradoras, ...logosSeguradoras, ...logosSeguradoras, ...logosSeguradoras].map((logo, i) => (
-            <div key={`${i}-${logo.src}`} className={`relative flex-shrink-0 h-14 w-48 flex items-center justify-center group ${logo.className || ''}`}>
+            <div key={`${i}-${logo.src}`} className={`relative flex-shrink-0 h-10 w-32 md:h-14 md:w-48 flex items-center justify-center group ${logo.className || ''}`}>
               <Image 
                 src={logo.src} 
                 alt={logo.alt} 
                 fill 
-                sizes="192px" 
+                sizes="(max-width: 768px) 128px, 192px" 
                 className="object-contain grayscale brightness-0 invert opacity-80 group-hover:grayscale-0 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500" 
               />
             </div>
@@ -202,40 +203,38 @@ export default function Home() {
         </div>
       </div>
 
-      {/* --- BANNER SECTION COM CGS OVERLAY (EFEITO REMOVIDO AQUI) --- */}
+      {/* --- BANNER SECTION --- */}
       <section className="relative w-full bg-[#f2efe9]">
         <div className="relative w-full">
           <Image src="/banner-protecao.png" alt="Fundo Proteção CGS" width={1920} height={1080} className="w-full h-auto block" priority />
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-end px-4 text-center pb-20 md:pb-40 overflow-hidden">
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-end px-4 text-center pb-12 md:pb-40 overflow-hidden">
             
-            {/* CGS Background Text (AJUSTADO: subiu + 2mm) */}
-            <h1 className={`${tanPearlFont.className} text-[6rem] md:text-[10rem] leading-none text-[#1c3a4b] tracking-tighter select-none mb-[-1rem] md:mb-[-2rem] relative -top-6 md:-top-16 opacity-90`}>
+            {/* CGS Background Text (AJUSTADO: subiu + 3mm no total) */}
+            <h1 className={`${tanPearlFont.className} text-[5rem] md:text-[10rem] leading-none text-[#1c3a4b] tracking-tighter select-none mb-[-1rem] md:mb-[-2rem] relative -top-8 md:-top-16 opacity-90`}>
               CGS
             </h1>
 
-            <h2 className="font-serif text-3xl md:text-5xl font-bold text-[#1c3a4b] leading-tight mb-4 drop-shadow-sm relative z-20">
-              Há 15 anos cuidando <br className="md:hidden" /> do seu patrimônio
+            <h2 className="font-serif text-xl md:text-5xl font-bold text-[#1c3a4b] leading-tight mb-3 md:mb-4 drop-shadow-sm relative z-20">
+              Há 15 anos cuidando <br /> do seu patrimônio
             </h2>
-            <p className="font-serif text-sm md:text-xl text-[#1c3a4b] mb-12 font-medium max-w-lg relative z-20">
+            <p className="font-serif text-xs md:text-xl text-[#1c3a4b] mb-8 md:mb-12 font-medium max-w-lg relative z-20">
               3x Indicada à melhor do Brasil pela <span className="italic">Bradesco Seguros</span>
             </p>
-            <a href="#seguros" className="border-2 border-[#1c3a4b] bg-transparent text-[#1c3a4b] font-bold px-8 py-3 rounded-full text-[10px] md:text-xs hover:bg-[#1c3a4b] hover:text-[#f2efe9] transition-all uppercase tracking-[0.2em] active:scale-95 shadow-lg relative z-20">
+            <a href="#seguros" className="border-2 border-[#1c3a4b] bg-transparent text-[#1c3a4b] font-bold px-6 py-2 md:px-8 md:py-3 rounded-full text-[10px] md:text-xs hover:bg-[#1c3a4b] hover:text-[#f2efe9] transition-all uppercase tracking-[0.2em] active:scale-95 shadow-lg relative z-20">
               SIMULE AGORA
             </a>
           </div>
         </div>
       </section>
 
-      {/* --- INSURANCE CARDS SCROLL --- */}
-      <section id="seguros" className="py-24 px-6 max-w-7xl mx-auto scroll-mt-20">
+      {/* --- INSURANCE CARDS --- */}
+      <section id="seguros" className="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto scroll-mt-20">
         <div className="relative group">
-          {/* Left Button */}
-          <button onClick={() => scroll('left')} className="absolute -left-4 md:-left-12 top-1/2 -translate-y-1/2 z-10 bg-[#1c3a4b] text-[#e0d5c3] p-3 rounded-full shadow-xl hover:bg-[#c1a46d] hover:text-[#1c3a4b] transition-colors hidden md:block" aria-label="Scroll left">
+          <button onClick={() => scroll('left')} className="absolute -left-4 md:-left-12 top-1/2 -translate-y-1/2 z-10 bg-[#1c3a4b] text-[#e0d5c3] p-3 rounded-full shadow-xl hover:bg-[#c1a46d] hover:text-[#1c3a4b] transition-colors hidden md:block">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
           </button>
           
-          {/* Scroll Container */}
-          <div ref={carouselRef} className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <div ref={carouselRef} className="flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {seguros.map((item) => (
               <div key={item.id} className="min-w-[85%] md:min-w-[calc(33.333%-1rem)] snap-center bg-[#faf8f4] p-6 md:p-8 rounded-2xl border border-[#c1a46d]/15 hover:border-[#c1a46d]/40 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
                 <div className="w-12 h-12 md:w-14 md:h-14 bg-[#e0d5c3]/30 rounded-xl flex items-center justify-center text-[#1c3a4b] mb-4 md:mb-6 group-hover:scale-110 transition-transform">
@@ -252,8 +251,7 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Right Button */}
-          <button onClick={() => scroll('right')} className="absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 z-10 bg-[#1c3a4b] text-[#e0d5c3] p-3 rounded-full shadow-xl hover:bg-[#c1a46d] hover:text-[#1c3a4b] transition-colors animate-pulse hover:animate-none" aria-label="Scroll right">
+          <button onClick={() => scroll('right')} className="absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 z-10 bg-[#1c3a4b] text-[#e0d5c3] p-3 rounded-full shadow-xl hover:bg-[#c1a46d] hover:text-[#1c3a4b] transition-colors animate-pulse hover:animate-none hidden md:block">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
           </button>
         </div>
@@ -263,7 +261,7 @@ export default function Home() {
       <footer id="footer" className="bg-[#1c3a4b] text-[#e0d5c3] py-8 px-6 border-t border-[#c1a46d]/20 text-sm scroll-mt-10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           <div className="flex flex-col items-start space-y-4">
-            <div className="relative w-28 h-16"><Image src="/logoo.png" fill alt="CGS Logo" className="object-contain" sizes="112px" /></div>
+            <div className="relative w-24 h-14 md:w-28 md:h-16"><Image src="/logoo.png" fill alt="CGS Logo" className="object-contain" sizes="112px" /></div>
             <div className="flex gap-3">
               <a href="https://www.instagram.com/cgscorretora" target="_blank" className="w-8 h-8 rounded-full bg-[#e0d5c3]/10 flex items-center justify-center hover:bg-[#c1a46d] hover:text-[#1c3a4b] transition-colors" aria-label="Instagram">
                 <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
@@ -273,6 +271,9 @@ export default function Home() {
               </a>
               <a href="https://wa.me/5511994751153" target="_blank" className="w-8 h-8 rounded-full bg-[#e0d5c3]/10 flex items-center justify-center hover:bg-[#c1a46d] hover:text-[#1c3a4b] transition-colors" aria-label="WhatsApp">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </a>
+              <a href="mailto:contato@cgscorretora.com.br" className="w-8 h-8 rounded-full bg-[#e0d5c3]/10 flex items-center justify-center hover:bg-[#c1a46d] hover:text-[#1c3a4b] transition-colors" aria-label="Email">
+                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
               </a>
             </div>
           </div>
