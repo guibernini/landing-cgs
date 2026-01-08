@@ -226,7 +226,7 @@ export default function Home() {
             
             {/* Botão sempre visível */}
             <a href="#seguros" className="border-2 border-[#1c3a4b] bg-transparent text-[#1c3a4b] font-bold px-6 py-2 md:px-8 md:py-3 rounded-full text-[10px] md:text-xs hover:bg-[#1c3a4b] hover:text-[#f2efe9] transition-all uppercase tracking-[0.2em] active:scale-95 shadow-lg relative z-20">
-              SIMULE AGORA
+              SIMULE JÁ
             </a>
           </div>
         </div>
