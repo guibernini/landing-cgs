@@ -91,26 +91,11 @@ const ICONS = {
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
-  const [isDesktopMode, setIsDesktopMode] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
-    // Verificar se é mobile na entrada e mostrar popup
-    if (window.innerWidth < 768) {
-      setShowPopup(true);
-    }
   }, []);
-
-  const switchMode = (mode: 'desktop' | 'mobile') => {
-    if (mode === 'desktop') {
-      setIsDesktopMode(true);
-    } else {
-      setIsDesktopMode(false);
-    }
-    setShowPopup(false);
-  };
 
   const scroll = (direction: 'left' | 'right') => {
     if (carouselRef.current) {
@@ -158,60 +143,18 @@ export default function Home() {
   const cardBtnStyle = "w-full block text-center py-3 rounded-lg font-bold text-[10px] tracking-[0.2em] transition-all bg-[#1c3a4b] text-[#e0d5c3] hover:bg-[#c1a46d] hover:text-[#1c3a4b] uppercase";
 
   return (
-    // Se estiver em modo Desktop, forçamos a largura minima, o que fará o celular dar zoom out ou scroll
-    <main className={`min-h-screen bg-[#f2efe9] text-[#1c3a4b] font-sans scroll-smooth relative overflow-x-hidden ${isDesktopMode ? 'min-w-[1280px]' : ''}`}>
+    <main className="min-h-screen bg-[#f2efe9] text-[#1c3a4b] font-sans scroll-smooth relative overflow-x-hidden">
       
-      {/* --- POPUP MOBILE --- */}
-      {showPopup && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-300">
-          <div className="bg-[#f2efe9] w-full max-w-sm rounded-2xl p-6 shadow-2xl border border-[#c1a46d]/30 relative animate-in slide-in-from-bottom-10 duration-500">
-            <button 
-              onClick={() => setShowPopup(false)} 
-              className="absolute top-3 right-3 text-[#1c3a4b]/50 hover:text-[#1c3a4b] p-1"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-            </button>
-            
-            <div className="text-center">
-              <h3 className="text-lg font-serif font-bold text-[#1c3a4b] mb-2">Bem-vindo à CGS!</h3>
-              <p className="text-sm text-gray-600 mb-6">Para a melhor experiência visual, recomendamos visualizar nosso site na versão completa.</p>
-              
-              <div className="flex flex-col gap-3">
-                <button 
-                  onClick={() => switchMode('desktop')}
-                  className="w-full bg-[#1c3a4b] text-[#e0d5c3] py-3 rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg hover:bg-[#c1a46d] transition-colors flex items-center justify-center gap-2"
-                >
-                  <span>Versão Desktop</span>
-                  <span className="bg-[#c1a46d] text-[#1c3a4b] text-[9px] px-1.5 py-0.5 rounded font-bold">RECOMENDADO</span>
-                </button>
-                <button 
-                  onClick={() => switchMode('mobile')}
-                  className="w-full bg-transparent border border-[#1c3a4b]/20 text-[#1c3a4b] py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#1c3a4b]/5 transition-colors"
-                >
-                  Continuar no Mobile
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* --- HEADER --- */}
       <header className="absolute top-0 left-0 w-full z-40 px-4 md:px-6 py-6 md:py-8 pointer-events-none">
         <div className="max-w-7xl mx-auto flex flex-row items-center justify-between">
-          
-          {/* Logo (Esquerda) */}
           <div className="relative h-14 w-24 md:h-20 md:w-32">
             <Image src="/logoo.png" fill alt="Logo CGS" className="object-contain" priority sizes="(max-width: 768px) 100vw, 33vw" />
           </div>
-
-          {/* Links (Escondidos no Mobile para limpar o visual) */}
           <div className="hidden md:flex gap-4">
             <a href="#seguros" className={heroBtnStyle}>Produtos</a>
             <a href="#footer" className={heroBtnStyle}>Contato</a>
           </div>
-
-          {/* Botão Simule Agora (Direita) */}
           <div>
             <a href="#seguros" className={heroBtnStyle}>SIMULE AGORA</a>
           </div>
@@ -252,29 +195,27 @@ export default function Home() {
         </div>
       </div>
 
-      {/* --- BANNER SECTION (MOBILE: SEM TEXTO, CGS SOLTO) --- */}
+      {/* --- BANNER SECTION (MOBILE AJUSTADO / DESKTOP ORIGINAL) --- */}
       <section className="relative w-full bg-[#f2efe9]">
         <div className="relative w-full">
           <Image src="/banner-protecao.png" alt="Fundo Proteção CGS" width={1920} height={1080} className="w-full h-auto block" priority />
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-end px-4 text-center pb-36 md:pb-40 overflow-hidden">
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-end px-4 text-center pb-24 md:pb-40 overflow-hidden">
             
-            {/* CGS Background Text:
-               - No mobile: "absolute top-1/4" -> Fica solto no topo, não empurra nada.
-               - No desktop (md): "md:relative" -> Volta ao normal.
+            {/* CGS Text: 
+               - Mobile: text-[5rem], -top-4, mb-0 (Fica menor e bem posicionado)
+               - Desktop: text-[10rem], -top-16, mb-[-2rem] (Fica gigante e impactante) 
             */}
-            <h1 className={`${tanPearlFont.className} absolute top-1/4 left-0 w-full md:relative md:top-auto md:left-auto md:w-auto text-[5rem] md:text-[10rem] leading-none text-[#1c3a4b] tracking-tighter select-none mb-2 md:mb-[-2rem] md:-top-16 opacity-90`}>
+            <h1 className={`${tanPearlFont.className} text-[5rem] md:text-[10rem] leading-none text-[#1c3a4b] tracking-tighter select-none mb-0 md:mb-[-2rem] relative -top-4 md:-top-16 opacity-90`}>
               CGS
             </h1>
 
-            {/* ESCONDIDOS NO MOBILE (hidden) */}
-            <h2 className="hidden md:block font-serif text-5xl font-bold text-[#1c3a4b] leading-tight mb-4 drop-shadow-sm relative z-20">
+            {/* Textos com tamanho ajustado para mobile (text-2xl) e desktop (text-5xl) */}
+            <h2 className="font-serif text-2xl md:text-5xl font-bold text-[#1c3a4b] leading-tight mb-3 md:mb-4 drop-shadow-sm relative z-20">
               Há 15 anos cuidando <br /> do seu patrimônio
             </h2>
-            <p className="hidden md:block font-serif text-xl text-[#1c3a4b] mb-12 font-medium max-w-lg relative z-20">
+            <p className="font-serif text-sm md:text-xl text-[#1c3a4b] mb-8 md:mb-12 font-medium max-w-lg relative z-20">
               3x Indicada à melhor do Brasil pela <span className="italic">Bradesco Seguros</span>
             </p>
-            
-            {/* Botão sempre visível */}
             <a href="#seguros" className="border-2 border-[#1c3a4b] bg-transparent text-[#1c3a4b] font-bold px-6 py-2 md:px-8 md:py-3 rounded-full text-[10px] md:text-xs hover:bg-[#1c3a4b] hover:text-[#f2efe9] transition-all uppercase tracking-[0.2em] active:scale-95 shadow-lg relative z-20">
               SIMULE AGORA
             </a>
