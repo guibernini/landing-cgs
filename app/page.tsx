@@ -34,7 +34,7 @@ const ICONS = {
   ),
   rural: (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1c3a4b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
-      <path d="M12 3v18M12 5l-2 2m2 0l-2 2m2 0l-2 2M12 5l2 2m-2 0l2 2m-2 0l2 2m-2 0l2 2m-2 0l2 2" />
+      <path d="M12 3v18M12 5l-2 2m2 0l-2 2m2 0l-2 2M12 5l2 2m-2 0l2 2m-2 0l2 2m-2 0l2 2m-2 0l2 2m-2 0l2 2" />
     </svg>
   ),
   pet: (
@@ -195,13 +195,9 @@ export default function Home() {
         </div>
       </div>
 
-      {/* --- BANNER SECTION CORRIGIDA PARA MOBILE --- */}
+      {/* --- BANNER SECTION (MOBILE COM GUARDA-CHUVA) --- */}
       <section className="relative w-full bg-[#f2efe9]">
         <div className="relative w-full">
-          {/* CORREÇÃO: 
-             No mobile (padrão) -> h-[85vh] (ocupa 85% da altura da tela, cortando as laterais).
-             No desktop (md) -> h-auto (volta ao normal proporcional).
-          */}
           <Image 
             src="/banner-protecao.png" 
             alt="Fundo Proteção CGS" 
@@ -213,8 +209,19 @@ export default function Home() {
           
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-end px-4 text-center pb-20 md:pb-40 overflow-hidden">
             
+            {/* --- NOVO: ÍCONE GUARDA-CHUVA (APENAS MOBILE) --- */}
+            {/* hidden no desktop (md:hidden). Margin bottom (mb-4) para separar do CGS */}
+            <div className="relative w-20 h-20 md:hidden mb-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <Image
+                    src="/guarda-chuva.png"
+                    alt="Proteção CGS"
+                    fill
+                    className="object-contain drop-shadow-sm"
+                />
+            </div>
+
             {/* CGS Text */}
-            <h1 className={`${tanPearlFont.className} text-[5rem] md:text-[10rem] leading-none text-[#1c3a4b] tracking-tighter select-none mb-4 md:mb-[-2rem] relative -top-0 md:-top-16 opacity-90`}>
+            <h1 className={`${tanPearlFont.className} text-[5rem] md:text-[10rem] leading-none text-[#1c3a4b] tracking-tighter select-none mb-4 md:mb-[-2rem] relative -top-4 md:-top-16 opacity-90`}>
               CGS
             </h1>
 
