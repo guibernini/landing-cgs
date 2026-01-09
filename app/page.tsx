@@ -112,19 +112,19 @@ export default function Home() {
   };
 
   const seguros = [
-    { id: "vida", title: "Vida", icon: ICONS.vida, desc: "Proteção financeira e tranquilidade para quem você mais ama.", link: "https://cgscorretora.seucorretor.digital/#/formularios/vida" },
-    { id: "auto", title: "Auto", icon: ICONS.auto, desc: "Cobertura completa, carro reserva e assistência 24h.", link: "https://cgscorretora.seucorretor.digital/#/formularios/auto" },
-    { id: "residencial", title: "Residencial", icon: ICONS.residencial, desc: "Segurança para seu lar com assistências emergenciais inclusas.", link: "https://cgscorretora.seucorretor.digital/#/formularios/residencial" },
+    { id: "vida", title: "Vida", icon: ICONS.vida, desc: "Proteção financeira e tranquilidade para quem você mais ama.", link: "https://cgsseg.seucorretor.digital/#/formularios/vida" },
+    { id: "auto", title: "Auto", icon: ICONS.auto, desc: "Cobertura completa, carro reserva e assistência 24h.", link: "https://cgsseg.seucorretor.digital/#/formularios/auto" },
+    { id: "residencial", title: "Residencial", icon: ICONS.residencial, desc: "Segurança para seu lar com assistências emergenciais inclusas.", link: "https://cgsseg.seucorretor.digital/#/formularios/residencial" },
     { id: "saude", title: "Saúde", icon: ICONS.saude, desc: "Os melhores planos e hospitais para cuidar de você e sua família." },
-    { id: "viagem", title: "Viagem", icon: ICONS.viagem, desc: "Viaje o mundo sem preocupações com extravios e despesas médicas.", link: "https://cgscorretora.seucorretor.digital/#/formularios/viagem" },
+    { id: "viagem", title: "Viagem", icon: ICONS.viagem, desc: "Viaje o mundo sem preocupações com extravios e despesas médicas.", link: "https://cgsseg.seucorretor.digital/#/formularios/viagem" },
     { id: "pet", title: "Pet", icon: ICONS.pet, desc: "Planos de saúde completos para cães e gatos." },
-    { id: "celular", title: "Celular", icon: ICONS.equipamento, desc: "Proteção contra roubo e danos para portáteis e eletrônicos.", link: "https://cgscorretora.seucorretor.digital/#/formularios/celular" },
-    { id: "bike", title: "Bike", icon: ICONS.bike, desc: "Pedale com tranquilidade protegendo sua bicicleta contra roubos.", link: "https://cgscorretora.seucorretor.digital/#/formularios/bike" },
+    { id: "celular", title: "Celular", icon: ICONS.equipamento, desc: "Proteção contra roubo e danos para portáteis e eletrônicos.", link: "https://cgsseg.seucorretor.digital/#/formularios/celular" },
+    { id: "bike", title: "Bike", icon: ICONS.bike, desc: "Pedale com tranquilidade protegendo sua bicicleta contra roubos.", link: "https://cgsseg.seucorretor.digital/#/formularios/bike" },
     { id: "odonto", title: "Odonto", icon: ICONS.odonto, desc: "Sorriso saudável com ampla rede credenciada nacional." },
-    { id: "empresarial", title: "Empresarial", icon: ICONS.empresarial, desc: "Multirrisco sob medida para empresas de todos os portes.", link: "https://cgscorretora.seucorretor.digital/#/formularios/empresarial" },
-    { id: "transportes", title: "Transportes", icon: ICONS.transporte, desc: "Segurança para cargas, embarcadores e transportadoras.", link: "https://cgscorretora.seucorretor.digital/#/formularios/caminhao" },
-    { id: "condominio", title: "Condomínio", icon: ICONS.condominio, desc: "Proteção obrigatória para síndicos, moradores e áreas comuns.", link: "https://cgscorretora.seucorretor.digital/#/formularios/condominio" },
-    { id: "diversos", title: "Seguros Diversos", icon: ICONS.diversos, desc: "Soluções personalizadas para diferentes tipos de riscos e necessidades.", link: "https://cgscorretora.seucorretor.digital/#/formularios/diversos" },
+    { id: "empresarial", title: "Empresarial", icon: ICONS.empresarial, desc: "Multirrisco sob medida para empresas de todos os portes.", link: "https://cgsseg.seucorretor.digital/#/formularios/empresarial" },
+    { id: "transportes", title: "Transportes", icon: ICONS.transporte, desc: "Segurança para cargas, embarcadores e transportadoras.", link: "https://cgsseg.seucorretor.digital/#/formularios/caminhao" },
+    { id: "condominio", title: "Condomínio", icon: ICONS.condominio, desc: "Proteção obrigatória para síndicos, moradores e áreas comuns.", link: "https://cgsseg.seucorretor.digital/#/formularios/condominio" },
+    { id: "diversos", title: "Seguros Diversos", icon: ICONS.diversos, desc: "Soluções personalizadas para diferentes tipos de riscos e necessidades.", link: "https://cgsseg.seucorretor.digital/#/formularios/diversos" },
   ];
 
   const logosSeguradoras = [
@@ -261,7 +261,7 @@ export default function Home() {
                 <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-grow font-light">{item.desc}</p>
                 <div className="mt-auto">
                   <a href={item.link || "https://wa.me/5511994751153"} target="_blank" className={cardBtnStyle}>
-                    {item.link ? "COTE AQUI!" : "ENTRE EM CONTATO"}
+                    {item.link ? "COTE AGORA!" : "ENTRE EM CONTATO"}
                   </a>
                 </div>
               </div>
